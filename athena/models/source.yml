@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: arkestral
+    database: awsdatacatalog
+    schema: arkestral
+    tables:
+      - name: googleads_basicperformancereport_ads
+      - name: googleads_matchtables_ads
