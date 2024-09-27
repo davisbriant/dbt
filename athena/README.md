@@ -1,15 +1,12 @@
-Welcome to your new dbt project!
+Welcome to my sample project! 
 
-### Using the starter project
+This dbt project connects to raw Google Ads api response data stored in S3. Amazon Athena is the sql engine that stages the raw file as a sql tables, parses the json objects into a relational star schema in the intermediate data layer, and then produces an artifact table result from a join across ad metrics and ad dimensions tables in the mart data layer. Tests are configured to ensure data integrity across layers of the data model. 
+
+### Using the sample project
 
 Try running the following commands:
 - dbt run
 - dbt test
 
 
-### Resources:
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [chat](https://community.getdbt.com/) on Slack for live discussions and support
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+
