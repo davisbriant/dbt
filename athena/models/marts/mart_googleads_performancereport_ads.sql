@@ -1,8 +1,11 @@
 {{
   config(
-    materialized='table',
+    materialized='incremental',
     unique_key = 'pkey',
     partition_by = ['date'],
+    table_type='iceberg',
+    format='parquet',
+    incremental_strategy='merge',
   )
 }}
 

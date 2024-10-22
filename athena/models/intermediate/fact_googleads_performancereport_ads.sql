@@ -18,7 +18,7 @@ json_format(json_extract(a.json_payload, '$.metrics.interactionEventTypes')) as 
 json_extract_scalar(a.json_payload, '$.segments.date') as "date",
 json_extract_scalar(a.json_payload, '$.segments.device') as "device",
 json_extract_scalar(a.json_payload, '$.segments.adNetworkType') as "adnetworktype",
-element_at(split(json_extract_scalar(a.json_payload, '$.adGroupAd.resourceName'),'/'),-1) as adid,
+a.adid as adid,
 sum(cast(json_extract_scalar(a.json_payload, '$.metrics.impressions') as bigint)) AS "impressions",
 sum(cast(json_extract_scalar(a.json_payload, '$.metrics.clicks') as bigint)) AS "clicks",
 sum(cast(json_extract_scalar(a.json_payload, '$.metrics.costMicros') as double))/1000000 AS "cost",
@@ -42,7 +42,7 @@ sum(cast(json_extract_scalar(a.json_payload, '$.metrics.gmailSaves') as double))
 sum(cast(json_extract_scalar(a.json_payload, '$.metrics.gmailSecondaryClicks') as double)) AS "gmailseconfaryclicks",
 sum(cast(json_extract_scalar(a.json_payload, '$.metrics.interactions') as double)) AS "interactions"
 from
-{{ ref('stg_googleads_performancereport_ads') }} a
+{{ ref('stg_googleads_reports_ads') }} a
 WHERE
 a.json_payload NOT LIKE '%no data%'
 GROUP BY
