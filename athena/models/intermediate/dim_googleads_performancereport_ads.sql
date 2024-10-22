@@ -8,11 +8,11 @@
 }}
 
 select 
-md5(to_utf8(concat(a.personid, a.mccid, element_at(split(json_extract_scalar(json_payload, '$.adGroupAd.resourceName'),'/'),-1)))) as pkey,
+md5(to_utf8(concat(a.personid, a.accountid, a.adid))) as pkey,
 "$path" as sourcefile,
 a.personid,
-a.mccid as accountid,
-element_at(split(json_extract_scalar(a.json_payload, '$.adGroupAd.resourceName'),'/'),-1) as adid,
+a.accountid as accountid,
+a.adid as adid,
 json_extract_scalar(a.json_payload, '$.adGroupAd.status') as status,
 json_extract_scalar(a.json_payload, '$.adGroupAd.ad.type') as type,
 case
@@ -27,7 +27,7 @@ json_extract_scalar(json_payload, '$.adGroupAd.ad.addedByGoogleAds') as addedbyg
 json_extract_scalar(json_payload, '$.adGroupAd.policySummary.approvalStatus') as approvalstatus,
 element_at(split(json_extract_scalar(json_payload, '$.adGroupAd.adGroup'),'/'),-1) as adgroupid
 from
-{{ ref('stg_googleads_matchtable_ads') }} a
+{{ ref('stg_googleads_objects_ads') }} a
 WHERE
 a.json_payload NOT LIKE '%no data%'
 GROUP BY
